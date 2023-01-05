@@ -1,0 +1,155 @@
+#main .section-data-tables .dataTables_wrapper{
+	border: double 4px #d0d0d0;
+	padding:5px;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable {
+    width: 100% !important;
+
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable thead th {
+    /*min-width: 69px;*/
+    color: #000;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable thead th.background-image-none,
+#main .section-data-tables .dataTables_wrapper table.dataTable thead th.select-all {
+    background-image: none !important;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable td,
+#main .section-data-tables .dataTables_wrapper table.dataTable th {
+    font-weight: 300;
+    white-space: nowrap;
+    border-bottom: 1px solid #cfd8dc;
+	font-size: 12px;
+	color: #000;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable th {
+    padding: 7px 14 7px 20px;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody {
+    overflow: auto;
+    max-width: 100%;
+    /*height: 300px;*/
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody td,
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody th {
+    white-space: break-spaces;
+    border: solid 1px #eee;
+    line-height: 1.3;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody td:not(:first-child) {
+    padding: 8px 14px;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody tr td:before,
+#main .section-data-tables .dataTables_wrapper table.dataTable tbody tr th:before {
+    font-size: 0.9rem;
+    line-height: 18px;
+    top: 13px;
+    right: inherit !important;
+    width: 18px;
+    height: 18px;
+    text-indent: 0;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable tfoot td,
+#main .section-data-tables .dataTables_wrapper table.dataTable tfoot th {
+    font-weight: 300;
+    white-space: nowrap;
+    border-top: 1px solid #cfd8dc;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr,
+#main .section-data-tables .dataTables_wrapper table.dataTable.stripe tbody tr {
+    height: auto;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr .odd,
+#main .section-data-tables .dataTables_wrapper table.dataTable.stripe tbody tr .odd {
+    background-color: #f4f5f7;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr .odd > .sorting_1,
+#main .section-data-tables .dataTables_wrapper table.dataTable.stripe tbody tr .odd > .sorting_1 {
+    background-color: transparent;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr .odd.selected,
+#main .section-data-tables .dataTables_wrapper table.dataTable.stripe tbody tr .odd.selected {
+    background-color: #acbad4 !important;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr .odd.selected th,
+#main .section-data-tables .dataTables_wrapper table.dataTable.stripe tbody tr .odd.selected th {
+    border-radius: 0;
+}
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr.hover > .sorting_1,
+#main .section-data-tables .dataTables_wrapper table.dataTable.display tbody tr:hover > .sorting_1,
+#main .section-data-tables .dataTables_wrapper table.dataTable.order-column.hover tbody tr.hover > .sorting_1,
+#main .section-data-tables .dataTables_wrapper table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+    background-color: transparent;
+}
+#main .section-data-tables .dataTables_wrapper table [type="checkbox"] + span:not(.lever):before,
+#main .section-data-tables .dataTables_wrapper table [type="checkbox"]:not(.filled-in) + span:not(.lever):after {
+    opacity: 0.5;
+    border-radius: 4px !important;
+}
+#main .section-data-tables .dataTables_wrapper .dataTables_filter#page-length-option_filter,
+#main .section-data-tables .dataTables_wrapper .dataTables_length#page-length-option_length {
+    display: block;
+}
+#main .section-data-tables .dataTables_wrapper .dataTables_filter#page-length-option_filter label select,
+#main .section-data-tables .dataTables_wrapper .dataTables_length#page-length-option_length label select {
+    display: inline-block;
+    width: auto;
+    height: auto;
+}
+#main .section-data-tables .dataTables_wrapper .dataTables_filter#page-length-option_filter label input,
+#main .section-data-tables .dataTables_wrapper .dataTables_length#page-length-option_length label input {
+    width: auto;
+    height: auto;
+}
+#main .section-data-tables .dataTables_wrapper .dataTables_info {
+    margin-left: 18px;
+    color: #616161;
+}
+#main .section-data-tables .dataTables_wrapper #page-length-option_paginate,
+#main .section-data-tables .dataTables_wrapper .dataTables_paginate {
+    margin-right: 0.35rem;
+    margin-bottom: 0.75rem;
+}
+#main .section-data-tables .dataTables_wrapper #page-length-option_paginate .paginate_button,
+#main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button {
+    margin-top: 0.25rem;
+    padding: 0.25em 0.65em;
+}
+#main .section-data-tables .dataTables_wrapper #page-length-option_paginate .paginate_button.current,
+#main .section-data-tables .dataTables_wrapper #page-length-option_paginate .paginate_button.current:hover,
+#main .section-data-tables .dataTables_wrapper #page-length-option_paginate .paginate_button:hover,
+#main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+#main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+#main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: #fff !important;
+    border: 1px solid #2196f3;
+    border-radius: 6px;
+    background: #2196f3;
+    box-shadow: 0 0 8px 0 #2196f3;
+}
+.dataTables_length select {
+    display: block;
+    height: 1.8rem;
+    appearance: none;
+    border: dotted 1px #9e9e9e;
+    border-bottom: solid 2px #38c8ff;
+    background: #f7f7f7;
+    margin-bottom: 8px;
+}
+.dataTables_length select:focus{
+	border-bottom: solid 2px red;
+}
+.dataTables_filter input[type] {
+    margin-left: 0.5em;
+    height: 1.8rem;
+    background: #f7f7f7;
+	max-width: 97%;
+	border: dotted 1px #9e9e9e;
+    border-bottom: solid 2px #38c8ff;
+}
+.dataTables_length label,
+.dataTables_filter label
+{
+	color:#000;
+}
+.section-data-tables table thead tr{background-color: #f2f2f2;}

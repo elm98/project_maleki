@@ -1,0 +1,72 @@
+﻿<html>
+<head>
+  <link href="css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="css/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <style>
+	body,div,button,p,h1{
+		font-family:tahoma
+	}
+  </style>
+</head>
+<body style="">
+  <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>Hello world</v-container>
+		<v-container>
+			<v-row>
+				<v-col>
+					<v-alert type="success">سلام به تو</v-alert>
+				</v-col>
+				
+				<v-spacer>
+					
+				</v-spacer>
+				
+				<v-col>
+					<v-btn @click="dialog=true"> <v-icon color="pink">mdi-heart</v-icon red> کلیک کن تا باز بشم</v-btn>
+				</v-col>
+			</v-row>
+		</v-container>
+      </v-main>
+	  
+	  
+	  <v-dialog v-model="dialog" persistent max-width="290">
+       <v-card>
+        <v-card-title class="headline">
+          Use Google's location service?
+        </v-card-title>
+        <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="dialog = false">
+            بستن
+          </v-btn>
+          <v-btn color="green darken-1"  text @click="dialog = false" >
+            قبول
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+	  
+	  
+	  
+    </v-app>
+  </div>
+
+  <script src="vue.js"></script>
+  <script src="vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify({rtl:true}),
+	  data:function(){
+		return {
+			dialog:false
+		}
+	  }
+    })
+  </script>
+</body>
+</html>

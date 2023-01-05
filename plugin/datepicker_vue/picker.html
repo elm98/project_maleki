@@ -1,0 +1,20 @@
+﻿<script src="vue.js"></script>
+<script src="moment.js"></script>
+<script src="moment-jalaali.js"></script>
+<script src="vue-persian-datetime-picker-browser.js"></script>
+<div id="app">
+    <date-picker v-model="date"></date-picker>
+	<date-picker v-model="time" type="time"></data-picker>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            date: '1397/02/02',
+			time:'',
+        },
+        components: {
+            DatePicker: VuePersianDatetimePicker
+        }
+    });
+</script> 

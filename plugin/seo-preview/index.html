@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google SERP/Snippet Preview Tool</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="css/jquery-seopreview.css" rel="stylesheet" type="text/css">
+<style>
+body { background-color: #fafafa; font-family: 'Roboto'; }
+.container { margin-top: 150px; }
+</style>
+</head>
+
+<body>
+  
+<div class="container">
+  <h1>Google SERP/Snippet Preview Tool</h1>
+<div class="cover">
+  <div class="form-group">
+    <label for="meta-title">Meta Title</label>
+    <input type="text" id="meta-title" class="form-control" value="Page Title" placeholder="Meta Title" />
+  </div>
+  <div class="form-group">
+    <label for="meta-url">Website URL</label>
+    <input type="text" id="meta-url" class="form-control" value="https://www.jqueryscript.net/" placeholder="Meta Webiste URL" />
+  </div>
+  <div class="form-group">
+    <label for="meta-desc">Meta Description</label>
+    <textarea id="meta-desc" class="form-control" placeholder="Meta Description">8000+ latest Free jQuery plugins with examples and tutorials for web &amp; mobile developers.</textarea>
+  </div>
+  <div class="form-group">
+    <label for="meta-featured-image">Featured Image URL</label>
+    <input type="text" id="meta-featured-image" class="form-control" value="http://via.placeholder.com/600x315" placeholder="Featured Image URL" />
+  </div>
+</div>
+
+  <h6>Google Preview</h6>
+  <div id="seopreview-google"></div>
+  <h6>Facebook Preview</h6>
+  <div id="seopreview-facebook"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="js/jquery-seopreview.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.seoPreview({
+      google_div: "#seopreview-google",
+      facebook_div: "#seopreview-facebook",
+      metadata: {
+        title: $('#meta-title'),
+        desc: $('#meta-desc'),
+        url: {
+        full_url: $('#meta-url')
+        }
+      },
+      google: {
+          show: true,
+          date: false
+      },
+      facebook: {
+          show: true,
+          featured_image: $('#meta-featured-image')
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>

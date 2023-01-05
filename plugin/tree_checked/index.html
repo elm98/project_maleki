@@ -1,0 +1,92 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery hummingbird-treeview Demo</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="hummingbird-treeview.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<div class="container">
+  <h2>jQuery hummingbird-treeview Demo</h2>
+<div id="treeview_container" class="hummingbird-treeview" style="height: 230px; overflow-y: scroll;">
+      <ul id="treeview" class="hummingbird-base">
+      <li data-id="0">
+    <i class="fa fa-plus"></i>
+    <label>
+        <input id="xnode-0" data-id="custom-0" type="checkbox" /> node-0
+    </label>
+    <ul>
+        <li data-id="1">
+      <i class="fa fa-plus"></i>
+      <label>
+          <input  id="xnode-0-1" data-id="custom-0-1" type="checkbox" /> node-0-1
+      </label>
+      <ul>
+          <li>
+        <label>
+            <input class="hummingbird-end-node" id="xnode-0-1-1" data-id="custom-0-1-1" type="checkbox" /> node-0-1-1
+        </label>
+          </li>
+          <li>
+        <label>
+            <input class="hummingbird-end-node" id="xnode-0-1-2" data-id="custom-0-1-2" type="checkbox" /> node-0-1-2
+        </label>
+          </li>
+      </ul>
+        </li>
+        <li data-id="1">
+      <i class="fa fa-plus"></i>
+      <label>
+          <input  id="xnode-0-2" data-id="custom-0-2" type="checkbox" /> node-0-2
+      </label>
+      <ul>
+          <li>
+        <label>
+            <input class="hummingbird-end-node" id="xnode-0-2-1" data-id="custom-0-2-1" type="checkbox" /> node-0-2-1
+        </label>
+          </li>
+          <li>
+        <label>
+            <input class="hummingbird-end-node" id="xnode-0-2-2" data-id="custom-0-2-2" type="checkbox" /> node-0-2-2
+        </label>
+          </li>
+      </ul>
+        </li>
+    </ul>
+      </li>
+  </ul>
+    </div>
+  <button class="btn btn-primary" id="checkAll">Check All</button>
+  <button class="btn btn-primary" id="uncheckAll">Uncheck All</button>
+  <button class="btn btn-danger" id="checkNode">Check Node 0-2-2</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="hummingbird-treeview.js"></script>
+<script>
+$("#treeview").hummingbird();
+$( "#checkAll" ).click(function() {
+  $("#treeview").hummingbird("checkAll");
+});
+$( "#uncheckAll" ).click(function() {
+  $("#treeview").hummingbird("uncheckAll");
+});
+$( "#collapseAll" ).click(function() {
+  $("#treeview").hummingbird("collapseAll");
+});
+$( "#checkNode" ).click(function() {
+  $("#treeview").hummingbird("checkNode",{attr:"id",name: "node-0-2-2",expandParents:false});
+});
+</script>
+
+</body>
+</html>

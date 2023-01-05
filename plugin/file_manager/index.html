@@ -1,0 +1,527 @@
+﻿<html  lang="fa">
+
+<head>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script src="vue.js"></script>
+    <script src="axios.min.js"></script>
+	<link rel="stylesheet" href="iztoast/css/iziToast.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>فایل منیجر وب</title>
+    <style>
+        .btn {
+            border-style: none;
+            border-radius: 5px;
+            padding: 9px 7px;
+            line-height: 1;
+            cursor: pointer;
+            min-width: 70px;
+        }
+        .btn-success{
+            background-color: #00be9c;
+            color: #fff;
+        }
+        .btn-danger{
+            background-color: #ff2f2e;
+            color: #fff;
+        }
+        .btn-warning{
+            background-color: #f4ff73;
+            color: #000;
+        }
+        .btn-info{
+            background-color: #5c88f0;
+            color: #fff;
+        }
+        .is-success{
+            color: #0aeac2;
+        }
+        .is-danger{
+            color: #ea202e;
+        }
+        .ch_array{
+            left: 0;
+            bottom: 0;
+            position: absolute;
+        }
+        .tab-button{
+            max-width: 100%;
+            padding: 15px;
+            position: fixed;
+            top: 0px;
+            z-index: 99;
+            width: 100%;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body dir="rtl">
+
+<div id="app">
+    <div id="fm_loading"></div>
+    <div class="tab-button" >
+        <button class="tablinks active" onclick="openTab(this,'tab1')">لــیست فایــلــها</button>
+        <button class="tablinks" onclick="openTab(this,'tab2')">آپـــلــود فــایــل</button>
+        <button class="tablinks" onclick="openTab(this,'tab3')">ایجاد پوشه جدید</button>
+        <button class="btn" v-on:click="files_delete()" style="background-color: red;color:#fff">حذف فایلهای انتخابی</button>
+        <div style="max-width: 100%;">
+            <input dir="ltr" type="text" v-model="directory" placeholder="شما در مسیر ریشه فایلها هستید" disabled style="border:solid 1px #ddd;width:100%;height: 25px;border-radius: 5px;padding: 5px 15px;margin-top: 7px;">
+        </div>
+    </div>
+    <div style="margin-top: 100px"></div>
+
+    <div id="tab1" class="tabContent active">
+        <!--<button class="btn" v-on:click="files_delete()" style="background-color: red;color:#fff">حذف انتخاب شده ها</button>-->
+        <ul class="file-list">
+            <li v-for="(v,k) in list"  :key="k" >
+                <div @click="select_item(v)">
+                    <img :src="v.icon">
+                    <p>
+                        <span class="file-caption" v-text="v.name"></span>
+                        <span class="file-size" v-text="v.size"></span>
+                        <span class="file-date" v-text="v.dateFa"></span>
+                    </p>
+                </div>
+                <input v-if="v.type === 'file' " class="ch_array" type="checkbox" v-model="check_list" :value="v.name">
+            </li>
+        </ul>
+    </div>
+
+    <div id="tab2" class="tabContent">
+        <!--<h3>آپلود فایل</h3>-->
+        <p style="font-size: 16px"><strong>فایلها را روی افزودن بکشید ،</strong> یا آنها را انتخاب کنید .</p>
+        <div id="drop-area">
+
+            <div class="fileBrows">
+                <input type="file" id="fileElem" multiple accept="image/*,audio/*,video/*,application/pdf,.zip" ref="fileInput" v-on:change="handleFiles">
+                <span><i>+</i><br>افزودن فایل </span>
+            </div>
+
+            <div style="display: flex;flex-wrap: wrap;">
+                <div v-for="(file,key) in file_array_info" :key="key" class="fm-preview-img">
+                    <img :src="file.preview">
+                    <div style="word-break: break-all;font-size: 11px;width: 100%">
+                        <b v-text="file.name"></b><br/>
+                        <span>  اندازه فایل : <span v-text="number_format(file.size)"></span> بایت</span><br/>
+                        <p v-on:click="deleteFile(key)" class="text-error cursor-pointer" style="display: block;text-align: left;width: 100%">حذف</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p id="feedback"  :class="{'is-success':response}"></p>
+                <button class="btn btn-success" v-on:click="send()" style="margin-top:5px"> شروع بارگذاری </button>
+                <img v-if="upload_loading" src="img/ring-loading.gif" height="50px" style="vertical-align: middle">
+            </div>
+        </div>
+    </div>
+
+    <div id="tab3" class="tabContent">
+        <div>
+            <p style="font-size: 16px"><strong>ابتدا نام فولدر را تایپ کنید </strong> سپس روی دکمه بزنید .</p>
+            <input type="text" v-model="new_folder" placeholder="نام پوشه را وارد کنید" >
+            <button class="btn" v-on:click="new_directory()">پوشه جدید را ایجاد کن</button>
+        </div>
+        <p style="font-size: 12px;color:rgb(122 169 8);">* دقت کنید پوشه در مسیر انتخابی شما ایجاد خواهد شد</p>
+        <div id="feedback2"></div>
+    </div>
+</div>
+
+<script>
+    let path = window.location.href;
+    let arr = path.split('/plugin/');
+    console.log(arr[0]);
+    //alert(window.location.href);
+</script>
+
+<!----دریافت ورودی های گت---->
+<script>
+    function getParam(name, url = window.location.href) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+</script>
+
+<script>
+    var filter = getParam('filter');
+</script>
+
+<!----اعلان یا توست---->
+<script src="iztoast/js/iziToast.min.js" type="text/javascript"></script>
+<script>
+function toast(obj){
+	//{type:'success',message:'پیامک به شماره همراه ارسال شد'}
+	let opt = {bg_color:'#ddd',font_color:'#fff'};
+	let type=typeof(obj.type)=="undefined"?'show':obj.type;
+	let title=typeof(obj.title)=="undefined"?'اعلان : ':obj.title;
+	let message=typeof(obj.message)=="undefined"?'':obj.message;
+	let overlay=typeof(obj.overlay)=="undefined"?false:obj.overlay;
+	let icon=typeof(obj.icon)=="undefined"?false:obj.icon;
+	let position=typeof(obj.position)=="undefined"?'topLeft':obj.position;
+	let cls=typeof(obj.cls)=="undefined"?'':obj.cls;
+	switch(type){
+		case 'success':
+			opt={bg_color:'#adefbe',font_color:'#666'};
+			break;
+
+		case 'info':
+			opt={bg_color:'#a5e0fe',font_color:'#666'};
+			break;
+
+		case 'warning':
+			opt={bg_color:'#efe9a9',font_color:'#666'};
+			break;
+
+		case 'white':
+			opt={bg_color:'#fff',font_color:'#000'};
+			break;
+
+		case 'error':
+		case 'danger':
+			opt={bg_color:'#efa6ab',font_color:'#666'};
+			break;
+
+	}
+	iziToast.show({
+		class:cls,
+		rtl:true,
+		theme: 'dark',
+		icon: icon,
+		iconColor: opt.font_color,
+		title: title,
+		titleColor: opt.font_color,
+		message: message,
+		messageColor:'#666',
+		backgroundColor:opt.bg_color,
+		position: position, // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+		progressBarColor: 'rgb(0, 0, 0)',
+		overlay:overlay,
+		overlayClose: true,
+		timeout: 5000,
+		color:opt.font_color,
+		closeOnEscape: true,
+		closeOnClick: false,
+	});
+}
+</script>
+
+<!----جابجایی بین تب ها---->
+<script>
+    function openTab(t,id) {
+        $(".tabContent").hide();
+        document.getElementById(id).style.display = "block";
+        $(".tablinks").removeClass('active');
+        $(t).addClass('active')
+    }
+</script>
+
+<!--Veu-->
+<script>
+        var vm;
+        $(document).ready(function () {
+            vm = new Vue({
+                el: '#app',
+                data: {
+                    serverUrl:'',
+                    //serverUrl:'http://localhost/material/management',
+                    filter:window.getParam('filter'),
+                    directory:'',
+                    list:[],
+                    loading:false,
+                    response:0,
+                    check_list:[],
+                    new_folder:'',
+                    upload_loading:false,
+                    fileList:[],
+                },
+                mounted:function () {
+                    setTimeout(function () {
+                        let arr = window.location.href.split('/plugin/');
+                        vm.serverUrl = arr[0]+'/management';
+                        vm.filter =  vm.filter == null ?'all':vm.filter;
+                        vm.select_item({type:'folder',path:''});
+                    },700);
+                },
+                computed:{
+                    file_array_info(){
+                        let arr=[];
+                        let reader = new FileReader;
+                        let $preview = null;
+                        this.fileList.forEach(function(file){
+                            $preview = URL.createObjectURL(file);
+                            arr.push({
+                                name:file.name,
+                                size:file.size,
+                                preview:URL.createObjectURL(file),
+                            })
+                        });
+                        return arr;
+                    }
+                },
+                methods:{
+                    select_item(obj){
+                        if( ['folder','back'].includes(obj.type)){
+                            vm.directory = obj.path;
+                            vm.loading = true;
+                            vm.get_list().then(function (r) {
+                                if(r.data.result){
+                                    vm.list = r.data.data;
+                                }
+                                vm.loading = false;
+                            })
+                        }else{
+                            parent.selectItem(obj.path);
+                        }
+                    },
+                    get_list(){
+                        return axios.get(vm.serverUrl+'/file-list?directory='+vm.directory+'&filter='+vm.filter).then(function (r) {
+                            vm.check_list=[];
+                            return r;
+                        }).catch(function (e) {
+                            return e;
+                        })
+                    },
+                    files_delete(){
+                        if(confirm('آیا از انجام این عملیات مطمن هستید ؟')){
+                            axios.post(vm.serverUrl+'/files-delete',{
+                                directory:vm.directory,
+                                files:vm.check_list,
+                            }).then(function (r) {
+                                vm.select_item({type:'folder',path:vm.directory});
+                                return 1;
+                            }).catch(function (e) {
+                                return e;
+                            })
+                        }
+                    },
+                    new_directory(){
+                        if(confirm('میخواهید پوشه در این مسیر ایجاد گردد ؟')){
+                            axios.post(vm.serverUrl+'/new-directory',{
+                                directory:vm.directory,
+                                new_folder:vm.new_folder,
+                            }).then(function (r) {
+                                if(r.data.result){
+                                    vm.toast({type:'success',message:r.data.msg});
+                                    vm.select_item({type:'folder',path:vm.directory});
+                                    vm.new_folder='';
+                                }else{
+                                    vm.toast({type:'warning',message:r.data.msg})
+                                }
+                            }).catch(function (e) {
+                                vm.toast({type:'error',message:'خطای نامشخص ، دوباره تلاش کنید'})
+                            })
+                        }
+                    },
+                    toast(obj){
+                        window.toast(obj);
+                    },
+                    /*بارگذاری فایل*/
+                    send:function(){
+                        let formData = new FormData();
+						//formData.append("MAX_FILE_SIZE", "5000000");
+                        if(vm.fileList.length === 0){
+                            vm.toast({type:'warning',message:'حداقل یک فایل انتخاب کنید'});
+                            return 0;
+                        }else{
+                            vm.fileList.forEach(function (f) {
+                                formData.append("files[]", f);
+                            });
+                            formData.append("directory", vm.directory);
+                        }
+                        vm.upload_loading = true;
+                        axios({
+                            url:vm.serverUrl+'/file-uploader',
+                            method:'POST',
+                            data:formData,
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }).then(function (r) {
+                            if(r.data.result){
+                                let obj={type:'folder',path:vm.directory};
+                                vm.select_item(obj);
+                                vm.fileList=[];
+                                vm.toast({type:'success',message:r.data.msg});
+                            }else{
+                                vm.toast({type:'warning',message:r.data.msg});
+                            }
+                            vm.upload_loading = false;
+                        }).catch(function (e) {
+                            vm.toast({type:'error',message:'در آپلود فایلها خطایی رخ داده'});
+                            vm.upload_loading = false;
+                        })
+                    },
+                    handleDrop:function (e) {
+                        //console.log(e);
+                        let self = this;
+                        let dt = e.dataTransfer;
+                        let files = dt.files;
+                        self.handleFiles(files);
+                    },
+                    handleFiles(event){
+                        //let input = this.$refs.fileInput;
+                        //let files = input.files;
+                        let files = event.target.files;
+                        for(let key in files){
+                            if(!files[key].hasOwnProperty('length')){
+                                //console.log(files[key]);
+                                this.previewFile(files[key]);
+                            }
+                        }
+                        let input = this.$refs.fileInput;
+                        input.value = null;
+                    },
+                    deleteFile(key){
+                        vm.fileList.splice(key,1);
+                    },
+                    previewFile:function (file) {
+                        if(file.type != undefined){
+                            vm.fileList.push(file);
+                        }
+                    },
+                    number_format(number){
+                        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+                        var n = !isFinite(+number) ? 0 : +number;
+                        var prec = !isFinite(+0) ? 0 : Math.abs(0);
+                        var sep = (typeof  ',' === 'undefined') ? ',' :  ',';
+                        var dec = (typeof '.' === 'undefined') ? '.' : '.';
+                        var s = '';
+                        var toFixedFix = function (n, prec) {
+                            var k = Math.pow(10, prec);
+                            return '' + (Math.round(n * k) / k)
+                                .toFixed(prec)
+                        };
+                        // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+                        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+                        if (s[0].length > 3) {
+                            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
+                        }
+                        if ((s[1] || '').length < prec) {
+                            s[1] = s[1] || '';
+                            s[1] += new Array(prec - s[1].length + 1).join('0')
+                        }
+                        return s.join(dec)
+                    },
+
+
+
+                },
+                watch: {
+                    loading(v){
+                        $el=document.getElementById('fm_loading');
+                        if(v){
+                            $el.style.display = 'block';
+                        }else{
+                            $el.style.display = 'none';
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+<style>
+    /*بارگذاری فایلها*/
+    #drop-area {
+        border-radius: 5px;
+        width: 100%;
+        margin: 5px auto;
+        min-height: 50px;
+        box-sizing: border-box;
+    }
+    #gallery {
+        margin-top: 10px;
+    }
+    .fm-preview-img{
+        max-width: 300px;
+        width: 100%;
+        height: 90px;
+        border-radius: 5px;
+        position: relative;
+        vertical-align: middle;
+        background: #f1f0f0;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        overflow: hidden;
+        margin: 3px;
+        border: dashed 2px #ddd;
+    }
+    .fm-preview-img img{
+        max-width: 100px;
+        height: 100%;
+        max-height: 100px;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+    .text-error{
+        color: coral;
+        font-weight: bold;
+        line-height: 1;
+        font-size: 13px;
+    }
+
+    .fileBrows{
+        width: 100%;
+        border:dashed 2px #0084ff;
+        border-radius: 5px;
+        height: 105px;
+        overflow: hidden;
+        position: relative;
+        z-index: 98;
+        vertical-align: middle;
+        display: inline-block;
+        background: #fff;
+    }
+    .fileBrows input{
+        width: 100%;
+        height: 100%;
+        border:solid 5px;
+        opacity: 0;
+        cursor: pointer;
+        display: block;
+        z-index: 999;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .fileBrows span{
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+        font-size: 15px;
+        z-index: 9;
+        position: absolute;
+        display: block;
+        color: #0084ff;
+        left: 0;
+        top:calc(30% - 20px);
+    }
+    .fileBrows span i{
+        font-size: 30px;
+        font-style: normal;
+    }
+
+    .cursor-pointer{
+        cursor: pointer !important;
+    }
+
+
+</style>
+
+</body>
+</html>

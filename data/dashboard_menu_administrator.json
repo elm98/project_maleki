@@ -1,0 +1,40 @@
+ [
+    {
+      "title": "خانه","route": "","href": "", "icon": "dashboard","badge": "",
+      "child": [
+        {"title": "داشبورد","route": "dashboard","href": ""},
+        { "title": "نمایش سایت","route": "","href": "{SITE_URL}", "target": "_blank"}
+      ]
+    },
+    {
+      "title": "مدیران و پرسنل","route": "","href": "", "icon": "people_outline","badge": "",
+      "child": [
+        {"title": "لیست همه کاربران","route": "user-list","href": ""},
+        {"title": "افزودن کاربر جدید","route": "user-add","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-list","href": ""},
+        {"hidden": "ویرایش کاربران","route": "user-edit/{id}","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-add","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-edit/{id}","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-source","href": ""},
+        {"title": "گزارشات ورود","route": "login-list","href": ""}
+      ]
+    },
+
+    {
+      "title": "مکاتبات","route": "","href": "", "icon": "text_format","badge": "",
+      "child": [
+        {"title": "نمایش همه","route": "post-list","href": ""},
+        {"title": "مکاتبه جدید","route": "post-add","href": ""},
+        {"hidden": "ساخت مکاتبه تازه","route": "post-edit/{id}","href": ""},
+        {"hidden": "دسته بندی مطالب","route": "post-cat","href": ""}
+      ]
+    },
+
+
+   {"title": "خروج سریع","route": "../log-out","href": "", "icon": "settings_power","badge": ""}
+  ]
+
+
+  
+
+

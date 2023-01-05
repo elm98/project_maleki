@@ -1,0 +1,116 @@
+ [
+    {
+      "title": "خانه","route": "","href": "", "icon": "dashboard","badge": "",
+      "child": [
+        {"title": "داشبورد","route": "dashboard","href": ""}
+      ]
+    },
+    {
+      "title": "مدیران و پرسنل","route": "","href": "", "icon": "people_outline","badge": "",
+      "child": [
+        {"title": "لیست همه کاربران","route": "user-list","href": ""},
+        {"title": "افزودن پرسنل جدید","route": "user-add","href": ""},
+        {"title": "مجوز دسترسی ها","route": "permission-list","href": ""},
+        {"hidden": "ویرایش کاربران","route": "user-edit/{id}","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-add","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-edit/{id}","href": ""},
+        {"hidden": "مجوز دسترسی ها","route": "permission-source","href": ""}
+      ]
+    },
+    {
+      "title": "مشتریان","route": "","href": "", "icon": "people","badge": "",
+      "child": [
+        {"title": "لیست مشتریان","route": "customer-list","href": ""},
+        {"title": "مشتری جدید","route": "customer-add","href": ""},
+        {"hidden": "ویرایش","route": "customer-edit/{id}","href": ""}
+      ]
+    },
+    {
+      "title": "مطلب و محتوا","route": "","href": "", "icon": "text_format","badge": "",
+      "child": [
+        {"title": "نمایش مطالب","route": "post-list","href": ""},
+        {"title": "ساخت محتوای تازه","route": "post-add","href": ""},
+        {"hidden": "ساخت محتوای تازه","route": "post-edit/{id}","href": ""},
+        {"title": "دسته بندی مطالب","route": "post-cat","href": ""}
+      ]
+    },
+    {
+      "title": "دیدگاهها","route": "","href": "", "icon": "rate_review","badge": "",
+      "child": [
+        {"title": "دیدگاههای ثبت شده","route": "comment-list","href": ""},
+        { "title": "سطل زباله","route": "comment-trash-list","href": ""}
+      ]
+    },
+    {
+      "title": "محتوای صفحه اول","route": "","href": "", "icon": "desktop_windows","badge": "",
+      "child": [
+        {"title": "لیست همه","route": "first-page-list","href": ""},
+        { "title": "یک محتوای جدید","route": "design-f-page","href": ""},
+        { "hidden": "یک محتوای جدید","route": "design-page-edit/{id}","href": ""}
+      ]
+    },
+    {
+      "title": "فروشگاه آنلاین","route": "","href": "", "icon": "shopping_cart","badge": "",
+      "child": [
+        {"title": "همه فروشندگان","route": "shop/store-list","href": ""},
+        {"title": "ایجاد فروشنده","route": "shop/store-add","href": ""},
+        { "hidden": "ویرایش فروشنده","route": "shop/store-edit/{id}","href": ""},
+        {"title": "مدیران فروشگاه","route": "shop/store-user","href": ""},
+        {"title": "دسته بندی فروشگاه","route": "shop/cat-store","href": ""},
+        {"title": "دسته بندی محصولات","route": "shop/cat","href": ""},
+        {"title": "مدیریت محصولات","route": "shop/product-list","href": ""},
+        {"hidden": "افزودن محصولات","route": "shop/product-new","href": ""},
+        {"hidden": "افزودن محصول","route": "shop/product-new2","href": ""},
+        {"hidden": "افزودن موجودی","route": "shop/product-quantity/{id}","href": ""},
+        {"hidden": "ویرایش محصول","route": "shop/product-edit/{id}","href": ""},
+        {"title": "مشخصات فنی محصول","route": "shop/custom-field","href": ""},
+        {"title": "مدیریت رنگ ها","route": "shop/color","href": ""},
+        {"title": "اندازه و سایز","route": "shop/size","href": ""},
+        {"title": "مدیریت برندها","route": "shop/brand","href": ""},
+        {"title": "پلن های تخفیف محصولات","route": "shop/discount","href": ""},
+        {"title": "کوپن تخفیف سبد خرید","route": "shop/coupon-cart","href": ""},
+        {"title": "فاکتورها","route": "shop/invoice","href": ""},
+        {"title": "روشهای ارسال محصول","route": "shop/shipping","href": ""},
+        {"title": "قالب رویدادها","route": "shop/notify-temp","href": ""}
+
+      ]
+    },
+    {
+      "title": "مدیریت املاک","route": "","href": "", "icon": "home","badge": "",
+      "child": [
+        {"title": "فایل املاک","route": "amlak-list","href": ""},
+        {"title": "ملک جدید","route": "amlak-add","href": ""},
+        {"title": "نمایندگان / مشاوران","route": "rs-agent-list","href": ""},
+        {"title": "مشاور ملک جدید","route": "rs-agent-add","href": ""},
+        {"hidden": "مشاور ملک ویرایش","route": "rs-agent-edit/{id}","href": ""},
+        {"hidden": " ملک جدید","route": "amlak-edit/{id}","href": ""},
+        {"hidden": " ملک جدید","route": "amlak-edit-address/{id}","href": ""},
+        {"hidden": " ملک جدید","route": "amlak-edit-content/{id}","href": ""},
+        {"hidden": " ملک جدید","route": "amlak-edit-image/{id}","href": ""},
+        {"title": "مدیریت نوع ملک","route": "amlak-cat","href": ""},
+        {"title": "مدیریت امکانات ملک","route": "amlak-property","href": ""},
+        {"title": "مدیریت زونکن ها","route": "amlak-zonkan","href": ""}
+      ]
+    },
+    {
+      "title": "گزارش مالی","route": "","href": "", "icon": "attach_money","badge": "",
+      "child": [
+        {"title": "لیست تراکنشات","route": "transaction-list","href": ""},
+        { "title": "پرداختی های درگاه","route": "payment-list","href": ""}
+      ]
+    },
+    {
+      "title": "پیامک ها","route": "sms-list","href": "", "icon": "message","badge": ""
+    },
+    {
+      "title": "رویداد ها","route": "notify-list","href": "", "icon": "notifications","badge": ""
+    },
+    {
+      "title": "تنظیمات","route": "setting","href": "", "icon": "settings","badge": ""
+    }
+  ]
+
+
+  
+
+

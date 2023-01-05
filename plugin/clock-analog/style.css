@@ -1,0 +1,105 @@
+/*------- tarahsite.net -----*/
+
+
+
+.clock {
+  height: 200px;
+  width: 200px;
+  background: linear-gradient(135deg, #66cbc4 0%,#66cbc4 50%,#5cbbb4 50%,#5cbbb4 100%);
+  border-radius: 50%;
+  padding: 15px;
+  /*position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -166px;
+  margin-top: -166px;*/
+}
+
+.face {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff 0%,#ffffff 50%,#e5e9e9 50%,#e5e9e9 100%);
+  border-radius: 50%;
+  position: relative;
+
+}
+
+.midnight,
+.six {
+  width: 6px;
+  height: 16px;
+  background-color: #000000;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  border-radius: 5px;
+}
+
+.midnight {
+  top: 0;
+}
+
+.six {
+  bottom: 0;
+}
+
+
+.three,
+.nine {
+  width: 16px;
+  height: 6px;
+  background-color: #000000;
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  border-radius: 5px;
+}
+
+.three {
+  right: 0;
+}
+
+.nine {
+  left: 0;
+}
+
+.second {
+  width: 3.6px;
+  height: 65px;
+  background-color: #fb7c72;
+  margin-left: -1.8px;
+}
+
+.hour {
+  height: 50px;
+  width: 2px;
+  background-color: #000;
+  margin-left: -1px;
+}
+
+.minute {
+  height: 65px;
+  width: 6px;
+  background-color: #000;
+  margin-left: -3px;
+}
+
+.hour, .minute, .second {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  border-radius:5px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -6px;
+  margin-top: -6px;
+  border-radius: 6px;
+}

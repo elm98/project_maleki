@@ -1,0 +1,15 @@
+@font-face {
+    font-family:'iranyekan';
+    font-weight: 500;
+    font-style: normal;
+    src: url('./font/iranyekan.eot');
+    src: url('./font/iranyekan.eot?#iefix') format("embedded-opentype"),
+    url('./font/iranyekan.woff') format("woff"),
+    url('./font/iranyekan.html') format("woff2"),
+    url('./font/iranyekan.html') format("truetype");
+}
+
+.picker *
+{
+    font-family:'iranyekan',tahoma;
+}

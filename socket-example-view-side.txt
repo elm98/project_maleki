@@ -1,0 +1,43 @@
+ Route::get('/fire', function () {
+
+    $data = [
+      'event' => 'userSignedUp',
+        'data' => [
+            'username' => 'omar'
+        ]
+    ];
+    Redis::publish('test-channel', json_encode($data));
+    return view('welcome');
+});
+
+
+
+-------server.js:
+
+var server = require('http').Server();
+
+var io = require('socket.io')(server)
+
+var Redis = require('ioredis');
+var redis = new Redis();
+
+redis.subscribe('test-channel');
+
+redis.on('message' , function(channel , message){
+
+      message = JSON.parse(message);
+    io.emit('fire' , 'message');
+    console.log(message);
+    
+})
+server.listen(3000);
+
+
+
+------view blade
+$(function(){
+            var socket = io('http://localhost:3000');
+            socket.on('fire' , function(data){
+                console.log('fired');
+            })
+        })

@@ -1,0 +1,39 @@
+﻿.fm_modal_shadow{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.fm_modal_body{
+    width: 90%;
+    height: 95vh;
+    background: #fff;
+    border-radius: 7px;
+    margin:auto;
+    margin-top: 15px;
+    display: block;
+    overflow: hidden;
+}
+.fm_modal_header{
+    padding: 5px 15px;
+    border-bottom: solid 1px #eee;
+    position: relative;
+}
+.fm_modal_close{
+    transform: rotate(45deg);
+    display: block;
+    left: 10px;
+    top: 3px;
+    position: absolute;
+    font-size: 27px;
+    cursor: pointer;
+}
+.fm_modal_content{
+    background: #fff;
+    height: calc(100% - 60px);
+    overflow: hidden;
+}

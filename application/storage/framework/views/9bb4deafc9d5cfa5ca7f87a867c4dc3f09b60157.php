@@ -1,0 +1,2 @@
+
+<?php echo $__env->make('front-end.404', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp64\www\mis_maleki\application\resources\views/errors/404.blade.php ENDPATH**/ ?>
